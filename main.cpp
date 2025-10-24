@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set>
 #include <cstdlib>
 #include <ctime>
 #include "Goat.h"
@@ -9,15 +9,15 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string [], string []);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 int main() {
     srand(time(0));
-    list<Goat> trip;
+    set<Goat> trip;
     bool again;
 
     // read & populate arrays for names and colors
@@ -68,7 +68,7 @@ int main_menu() {
     return c;
 }
 
-int select_goat(list<Goat> trip) {
+int select_goat(set<Goat> trip) {
     int c;
     cout << "Enter the number of the goat you wish to choose: ";
     cin >> c;
@@ -76,7 +76,7 @@ int select_goat(list<Goat> trip) {
     return c;
 }
 
-void display_trip(list<Goat> trip){
+void display_trip(set<Goat> trip){
     cout << endl;
     
     if (trip.empty()) {
@@ -92,14 +92,14 @@ void display_trip(list<Goat> trip){
     }
 }
 
-void add_goat(list<Goat> &trip, string names[], string colors[]) {
+void add_goat(set<Goat> &trip, string names[], string colors[]) {
     string name = names[rand() % SZ_NAMES];
     string color = colors[rand() % SZ_COLORS];
     int age = rand() % MAX_AGE + 1;
-    trip.push_back(Goat(name, age, color));
+    trip.insert(Goat(name, age, color));
 }
 
-void delete_goat(list<Goat> &trip) {
+void delete_goat(set<Goat> &trip) {
     if (trip.empty()) {
         cout << "No goats on this trip.\n";
         return;
